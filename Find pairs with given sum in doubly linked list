@@ -1,0 +1,31 @@
+class Solution {
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+       ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        Node p1=head;
+        Node p2=head;
+        while(p2.next!=null){//to make p2 point at end of linkedlist
+            p2=p2.next;
+        }
+         while(p1!=p2  && p2.next!=p1){//when both point at same end when there is a chance o
+         //forming cycle end 
+            ArrayList<Integer> l=new ArrayList<>();
+             if(p1.data+p2.data==target){
+                l.add(p1.data);
+                l.add(p2.data);
+                p1=p1.next;
+                p2=p2.prev;
+                ans.add(l);
+            }
+            else{
+                if(p1.data+p2.data>target){
+                    p2=p2.prev;
+                }else{
+                    p1=p1.next;
+                }
+            }
+            
+        }
+        return ans;
+    }
+}
+        

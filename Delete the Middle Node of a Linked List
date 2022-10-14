@@ -1,0 +1,17 @@
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        if(head==null|| head.next==null)return null;
+       ListNode slow=head;
+        ListNode fast=head.next.next;
+        //to find node before middle so that we can delete middle node
+        while(fast!=null && fast.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        //go to node before middle ,set its next pointer to node after middle 
+        //so that middle node is deleted
+         slow.next=slow.next.next;
+        return head;
+    
+    }
+}

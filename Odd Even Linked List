@@ -1,0 +1,32 @@
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head==null)return null;
+        ListNode odd=head;
+        ListNode even=head.next;
+        ListNode o_temp=head;
+        ListNode e_temp=head.next;
+        while(e_temp!=null &&  e_temp.next!=null){
+           o_temp.next=o_temp.next.next;
+            e_temp.next=e_temp.next.next;
+            o_temp=o_temp.next;
+            e_temp=e_temp.next;
+        }
+        o_temp.next=even;//coonecting even and odd linkedlists
+        return head;
+        //TC:O(N) SPACE:O(N)
+        // int len=0;  ListNode temp=head;
+        // while(temp!=null){     len++;  temp=temp.next;   }
+        // int a[]=new int[len];
+        // temp=head;  int i=0;
+        // while(temp!=null){   a[i++]=temp.val;   temp=temp.next;  }
+        // ListNode node=new ListNode(a[0]);
+        // ListNode n=node;
+        // for(int j=1;j<a.length;j++){
+        //     if(j%2==0){
+        //         n.next=new ListNode(a[j]);   n=n.next; }   }
+        //    for(int j=1;j<a.length;j++){
+        //          if(j%2!=0){
+        //         n.next=new ListNode(a[j]);    n=n.next;  }  }
+         // return node;
+    }
+}

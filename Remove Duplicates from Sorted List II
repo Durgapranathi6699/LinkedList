@@ -1,0 +1,37 @@
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+       //  ListNode dummy=new ListNode(0);
+       //   ListNode temp=dummy;
+       //  Set<Integer> set=new TreeSet<>();
+       //   Set<Integer> set2=new TreeSet<>();
+       // while(head!=null){
+       //      if(set.contains(head.val)){
+       //          set2.add(head.val);
+       //      }
+       //     set.add(head.val);
+       //      head=head.next;
+       //  }
+       //   for(int i:set){
+       //       if(!set2.contains(i)){
+       //     temp.next=new ListNode(i);
+       //      temp=temp.next;
+       //       }
+       //  }
+       //  return dummy.next;
+        ListNode dummy=new ListNode(0);
+         ListNode temp=dummy;
+        dummy.next=head;
+        while(head!=null){
+            if(head.next!=null && head.val==head.next.val){
+                while(head.next!=null && head.val==head.next.val){
+                    head=head.next;
+                }
+                temp.next=head.next;
+            }else{
+                temp=temp.next;
+            }
+            head=head.next;
+        }
+        return dummy.next;
+    }
+}

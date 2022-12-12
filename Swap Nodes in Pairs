@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head==null || head.next==null )return head;
+        
+        //3 pointers p,q,temp
+        //p points to head
+        //q is next node of p (new_start)
+        //temp is next node of q
+        //q next point to p (before that store link in temp node)
+        //p next point to temp next 
+        //set p to temp for next iteration of nodes
+        
+        ListNode p=head;
+       ListNode new_start=p.next;;
+        while(true){
+               ListNode q=p.next;
+           ListNode temp=q.next;
+             q.next=p;
+           if(temp==null || temp.next==null){  //for odd no.of nodes
+               p.next=temp;
+               break;
+           }
+           p.next=temp.next;
+           p=temp;
+        }
+        return new_start;
+    }
+}

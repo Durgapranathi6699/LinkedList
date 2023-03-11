@@ -1,0 +1,24 @@
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head==null)return null;
+        if(head.next==null)return new TreeNode(head.val);
+         ListNode slow=head;
+        ListNode fast=head;
+        ListNode slow_prev=null;
+        while(fast!=null && fast.next!=null){
+            slow_prev=slow;//used to break the link b/w left and right
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        //slow points to mid
+
+        slow_prev.next=null; //to seperate left half and right half
+
+      TreeNode root=new TreeNode(slow.val);
+      
+       root.left=sortedListToBST(head); //recursively calling for left half
+       root.right=sortedListToBST(slow.next);//right half
+       return root;
+    }
+    
+}

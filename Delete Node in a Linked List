@@ -1,0 +1,8 @@
+class Solution {
+    public void deleteNode(ListNode node) {
+            //node to be deleted - store next value and delete cur value
+        node.val=node.next.val;
+       
+        node.next=node.next.next;
+    }
+}

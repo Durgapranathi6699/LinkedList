@@ -1,33 +1,38 @@
+
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-       return partionIntoLists(0,lists.length-1,lists);
-    }
-
-     ListNode partionIntoLists(int start,int end,ListNode[] lists){
-        if(start>end){
+        if(lists.length==0){
             return null;
         }
-        if(start==end){
-            return lists[start];
+        ListNode l1=lists[0];
+        ListNode l2=null;
+        for(int i=1;i<lists.length;i++){
+            l2=lists[i];
+            l1=merge(l1,l2);
         }
-        int mid=start+(end-start)/2;
-        ListNode l1=partionIntoLists(start,mid,lists);
-        ListNode l2=partionIntoLists(mid+1,end,lists);
-        //merge
-        return mergeTwoSortedLists(l1,l2);
+        return l1;
     }
-
-    ListNode mergeTwoSortedLists(ListNode l1,ListNode l2){
+    ListNode merge(ListNode l1,ListNode l2){
         if(l1==null)return l2;
         if(l2==null)return l1;
-        if(l1.val<l2.val){
-            l1.next=mergeTwoSortedLists(l1.next,l2);
-            return l1;
-        }else{
-            l2.next=mergeTwoSortedLists(l1,l2.next);
-            return l2;
+        ListNode temp=new ListNode(-1);
+        ListNode head=temp;                  //for returning
+        while(l1!=null && l2!=null){
+            if(l1.val<l2.val){
+                temp.next=l1;
+                l1=l1.next;
+            }else{
+                temp.next=l2;
+                l2=l2.next;
+            }
+            temp=temp.next;
         }
-      
+        if(l1!=null){
+            temp.next=l1;
+        }
+        if(l2!=null){
+            temp.next=l2;
+        }
+        return head.next;
     }
-   
 }
